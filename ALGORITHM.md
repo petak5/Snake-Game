@@ -1,4 +1,4 @@
-1. **Create Snake Game**
+Main. **Create Snake Game**
   1. Create the Snake object (dot, square etc)
   2. Get keystrokes from the user to move the snake around
     * Snake will have to be control using the arrow keys
