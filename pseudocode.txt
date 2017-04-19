@@ -1,1 +1,8 @@
+Step 1 : make snake move with one block
 
+bloc = (x,y) so for (block=0;x<block;x++) : type space 
+                 for (blah = 0; y<blah;y++) : \n
+                 type #
+                 clearscreen
+                 
+                
