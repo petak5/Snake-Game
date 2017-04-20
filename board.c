@@ -1,4 +1,4 @@
 
 //board for the game
-#define int board_x = 80
-#define int board_y = 40
+#define BOARD_X = 80
+#define BOARD_Y = 40
