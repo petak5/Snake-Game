@@ -3,14 +3,7 @@
  *	basic list functions 
  */
 
-/* snake structure */
-struct segment{
-	int x;
-	int y;
-	struct segment *next;
-};
-typedef struct segment segment;
-typedef segment *snake;
+#include "snake.h"
 
 /* list manipulation */
 void prepend(snake sn, segment *sg)
