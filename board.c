@@ -40,13 +40,3 @@ int  board()
 	return 0;
 }
 
-int main()
-{
-
-
-	board();
-
-
-	return 0;
-}
-
