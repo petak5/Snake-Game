@@ -70,3 +70,16 @@ void move_snake(snake s, int move_x, int move_y)
 	free(last_segment(s));
 	last_segment(s) = NULL;
 }
+
+/* returns 1 if a segment is present on the given (x,y) */
+int check_snake(snake s, int x, int y)
+{
+	snake tmp = s;
+	while(tmp){
+		if(tmp->x == x && tmp->y == y)
+			return 1;
+		else
+			tmp = tmp->next;
+	}
+	return 0;
+}
