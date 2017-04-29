@@ -1,10 +1,10 @@
 //check to see if the snake has hit the wall 
-int void wallcheck(posx,posy) {
-   if (--posx >= board_x || ++posx <= 0) {
-      return 12
+int wallcheck(posx,posy) { 
+   if (posx >= BOARD_X || posx <= 0) {
+      endgame();
    }
-  else if (--posy >=board_y || ++posy <=0) {
-    return 12
+  else if (posy >=BOARD_Y || posy <=0) {
+    endgame();
   }
   else {
     return 0
