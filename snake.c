@@ -14,9 +14,11 @@
 
 //
 // TODO: test all the functions
+//		 check if function's parameter isn't NULL !!
 //
 
 #include "snake.h"
+#include <stdio.h>	// THIS IS HERE JUST FOR TESTING PURPOSES
 
 /* --- list manipulation --- */
 
@@ -24,15 +26,16 @@
 void prepend(snake sn, segment *sg)
 {
 	snake tmp = sn;
-	sn->next = sg;
-	sg->next = tmp;
+	sn = sg;
+	sn->next = tmp;
 }
 
 /* adds a segment at the end */
+/* WORKING */
 void append(snake sn, segment *sg)
 {
 	snake tmp = sn;
-	while(tmp){
+	while(tmp->next != NULL){
 		tmp = tmp->next;
 	}
 	tmp->next = sg;
@@ -40,12 +43,12 @@ void append(snake sn, segment *sg)
 }
 
 /* returns a pointer to the last segment, the snake's tail */
-// NEED TO FIX, INFINITE LOOP
+// NEED TO FIX, INFINITE LOOP -> possible solution down there
 segment* last_segment(snake s)
 {
 	snake tmp = s;
-	while(tmp->next != NULL){
-		tmp = tmp->next;
+	while(tmp->next != NULL){	/* it isn't moving, must change position even if check is false */
+		tmp = tmp->next;		/* maybe do it like: while(tmp->next != NULL, tmp = tmp->next) ??? */
 	}
 	return tmp;
 }
@@ -89,5 +92,43 @@ int check_snake(snake s, int x, int y)
 		else
 			tmp = tmp->next;
 	}
+	return 0;
+}
+
+// MY TESTING SETUP :D, can't figure out what am I doing wrong, will continue tomorrow
+
+/* TEMP CODE */
+/* Testing some functions */
+int main(void) {
+	snake my_sn,
+		  tmp_sn;
+	segment *new_sg;
+
+	printf("1\n");
+
+	new_sg = (segment *) malloc(sizeof(segment));
+	my_sn->x = 10;
+	my_sn->y = 20;
+	my_sn->next = NULL;
+
+	printf("2\n");
+
+	new_sg = (segment *) malloc(sizeof(segment));
+	new_sg->x = 15;
+	new_sg->y = 30;
+	new_sg->next = NULL;
+
+	printf("3\n");
+
+	prepend(my_sn, new_sg);
+
+	printf("4\n");
+
+	printf("%p - %p\n", my_sn, my_sn->next);
+	tmp_sn = my_sn;
+	printf("1.: x = %d, y = %d\n", tmp_sn->x, tmp_sn->y);
+	tmp_sn = tmp_sn->next;
+	printf("2.: x = %d, y = %d\n", tmp_sn->x, tmp_sn->y);
+
 	return 0;
 }
