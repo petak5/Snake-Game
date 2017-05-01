@@ -44,13 +44,13 @@ void append(snake sn, segment *sg)
 
 /* returns a pointer to the last segment, the snake's tail */
 // NEED TO FIX, INFINITE LOOP -> possible solution down there
+// did it from scratch in a recursive fashion, still broken -> segfault, i feel dumb
 segment* last_segment(snake s)
 {
-	snake tmp = s;
-	while(tmp->next != NULL){	/* it isn't moving, must change position even if check is false */
-		tmp = tmp->next;		/* maybe do it like: while(tmp->next != NULL, tmp = tmp->next) ??? */
-	}
-	return tmp;
+	if(s->next == NULL)
+		return s;
+	else
+		return last_segment(s->next);
 }
 
 /* returns 1 if snake intersects with itself */
@@ -96,17 +96,19 @@ int check_snake(snake s, int x, int y)
 }
 
 // MY TESTING SETUP :D, can't figure out what am I doing wrong, will continue tomorrow
+// you're accessing tmp_sn->next members while it's NULL
 
 /* TEMP CODE */
 /* Testing some functions */
-int main(void) {
-	snake my_sn,
-		  tmp_sn;
+int main(void)
+{
+	snake my_sn, tmp_sn;
 	segment *new_sg;
 
 	printf("1\n");
 
-	new_sg = (segment *) malloc(sizeof(segment));
+	my_sn = (segment *) malloc(sizeof(segment));
+
 	my_sn->x = 10;
 	my_sn->y = 20;
 	my_sn->next = NULL;
@@ -127,8 +129,13 @@ int main(void) {
 	printf("%p - %p\n", my_sn, my_sn->next);
 	tmp_sn = my_sn;
 	printf("1.: x = %d, y = %d\n", tmp_sn->x, tmp_sn->y);
+	my_sn->next = new_sg; //<- FIXED with this line
 	tmp_sn = tmp_sn->next;
 	printf("2.: x = %d, y = %d\n", tmp_sn->x, tmp_sn->y);
+
+	printf("5\n");
+
+//	snake test = last_segment(my_sn); <- still broken
 
 	return 0;
 }
