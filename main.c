@@ -29,7 +29,7 @@ int main() {
 	while (1) {		
 		read(STDIN_FILENO, &inp, 1); //reads for 2 seconds
 		printf("%d \r\n",inp); //prints the character pressed
-    system("clear")
+    		system("clear");
 	}
 	endgame();
 }
