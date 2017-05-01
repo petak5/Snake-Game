@@ -28,7 +28,20 @@ int main() {
 	char inp = '\0'; //initializing variable
 	while (1) {		
 		read(STDIN_FILENO, &inp, 1); //reads for 2 seconds
-		printf("%d \r\n",inp); //prints the character pressed
+		switch (inp) { // Checks the character pressed
+			case ('w'):
+				printf("W\r\n");
+				break;
+			case ('a'): 
+				printf("A\r\n");
+				break;
+			case ('s'): 
+				printf("S\r\n");
+				break;
+			case ('d'): 
+				printf("D\r\n");
+				break;
+		}
     		system("clear");
 	}
 	endgame();
