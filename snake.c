@@ -23,11 +23,13 @@
 /* --- list manipulation --- */
 
 /* adds a segment at the beginning */
-void prepend(snake sn, segment *sg)
+/* WORKING BUT WE HAVE TO RETURN THE VALUE LIKE THIS */
+segment* prepend(snake sn, segment *sg)
 {
 	snake tmp = sn;
 	sn = sg;
 	sn->next = tmp;
+	return sn;
 }
 
 /* adds a segment at the end */
@@ -43,8 +45,7 @@ void append(snake sn, segment *sg)
 }
 
 /* returns a pointer to the last segment, the snake's tail */
-// NEED TO FIX, INFINITE LOOP -> possible solution down there
-// did it from scratch in a recursive fashion, still broken -> segfault, i feel dumb
+/* WORKING */
 segment* last_segment(snake s)
 {
 	if(s->next == NULL)
@@ -102,7 +103,7 @@ int check_snake(snake s, int x, int y)
 /* Testing some functions */
 int main(void)
 {
-	snake my_sn, tmp_sn;
+	snake my_sn, tmp_sn, snake_test;
 	segment *new_sg;
 
 	printf("1\n");
@@ -122,20 +123,22 @@ int main(void)
 
 	printf("3\n");
 
-	prepend(my_sn, new_sg);
+	my_sn = prepend(my_sn, new_sg);
 
 	printf("4\n");
 
 	printf("%p - %p\n", my_sn, my_sn->next);
 	tmp_sn = my_sn;
 	printf("1.: x = %d, y = %d\n", tmp_sn->x, tmp_sn->y);
-	my_sn->next = new_sg; //<- FIXED with this line
 	tmp_sn = tmp_sn->next;
 	printf("2.: x = %d, y = %d\n", tmp_sn->x, tmp_sn->y);
 
 	printf("5\n");
 
-//	snake test = last_segment(my_sn); <- still broken
+	snake_test = last_segment(my_sn);
 
+	printf("6\n");
+
+	printf("Last segment: %p\n\tx = %d, y = %d\n", snake_test, snake_test->x, snake_test->y);
 	return 0;
 }
