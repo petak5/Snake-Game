@@ -72,6 +72,26 @@ void delete_segment(snake sg)
 	sg = NULL;
 }
 
+/* deletes the last segment
+ * could be used like
+ *	if(ate food){
+		move
+	}
+	else{
+		move
+		delete last
+	}
+ */
+void delete_last_segment(snake s)
+{
+	snake p = s;
+	while(p->next->next != NULL){
+		p = p->next;
+	}
+	free(p->next);
+	p->next = NULL;
+}
+
 /* append the new head position, remove the tail position */
 void move_snake(snake s, int move_x, int move_y)
 {
@@ -145,8 +165,12 @@ int main(void)
 	else
 		printf("You're still alive\n");
 
-	delete_segment(last_segment(my_sn));		// IT DOESN'T SET THE POINTER TO NULL, IT JUST SETS X AND Y TO 0
+	/*
+	delete_segment(last_segment(my_sn));
+	last_segment(my_sn)->next = NULL;		// IT DOESN'T SET THE POINTER TO NULL, IT JUST SETS X AND Y TO 0
 												// THE POINTER STILL HAS ITS ADDRESS IN MEMORY INSTEAD OF NULL
+	*/
+	delete_last_segment(my_sn); // <- seems to work
 
 	tmp_sn = my_sn;
 	printf("1. %p -> x = %d, y = %d\n", tmp_sn, tmp_sn->x, tmp_sn->y);
@@ -155,7 +179,8 @@ int main(void)
 	tmp_sn = tmp_sn->next;
 	printf("3. %p -> x = %d, y = %d\n", tmp_sn, tmp_sn->x, tmp_sn->y);
 	tmp_sn = tmp_sn->next;
-	printf("4. %p -> x = %d, y = %d\n", tmp_sn, tmp_sn->x, tmp_sn->y);
+	//printf("4. %p -> x = %d, y = %d\n", tmp_sn, tmp_sn->x, tmp_sn->y); trying to avoid segfault
+	printf("4. %p\n", tmp_sn);
 
 	snake_test2 = last_segment(my_sn);
 
