@@ -7,6 +7,15 @@
 #define BOARD_Y  40
 
 
+void checkval(int boxnum) { // checks if any coordinates are the same between blocks, with size boxnum of snakelength
+	int count;
+	for (count=0;count<boxnum;count++) {		
+		if ((posx[count] == posx[(count+1)]) && (posy[count] == posy[(count+1)])) {
+			printf("crtical error, values are the same");
+			}
+		}
+	
+}
 
 // Initializing the board
 int  board()
