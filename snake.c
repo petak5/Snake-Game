@@ -26,10 +26,8 @@
 /* WORKING BUT WE HAVE TO RETURN THE VALUE LIKE THIS */
 segment* prepend(snake sn, segment *sg)
 {
-	snake tmp = sn;
-	sn = sg;
-	sn->next = tmp;
-	return sn;
+	sg->next = sn;
+	return sg;
 }
 
 /* adds a segment at the end */
@@ -55,9 +53,10 @@ segment* last_segment(snake s)
 }
 
 /* returns 1 if snake intersects with itself */
+/* WORKING */
 int intersect_snake(snake s)
 {
-	snake tmp = s;
+	snake tmp = s->next;
 	while(tmp){
 		if(s->x == tmp->x && s->y == tmp->y)
 			return 1;
@@ -67,10 +66,10 @@ int intersect_snake(snake s)
 }
 
 /* deletes the segment pointed by seg */
-void delete_segment(snake seg)
+void delete_segment(snake sg)
 {
-	free(seg);
-	seg = NULL;
+	free(sg);
+	sg = NULL;
 }
 
 /* append the new head position, remove the tail position */
@@ -96,49 +95,71 @@ int check_snake(snake s, int x, int y)
 	return 0;
 }
 
-// MY TESTING SETUP :D, can't figure out what am I doing wrong, will continue tomorrow
-// you're accessing tmp_sn->next members while it's NULL
-
 /* TEMP CODE */
 /* Testing some functions */
 int main(void)
 {
-	snake my_sn, tmp_sn, snake_test;
-	segment *new_sg;
-
-	printf("1\n");
+	snake my_sn, tmp_sn, snake_test1, snake_test2;
+	segment *sg1, *sg2, *sg3;
 
 	my_sn = (segment *) malloc(sizeof(segment));
 
-	my_sn->x = 10;
-	my_sn->y = 20;
+	my_sn->x = 1;
+	my_sn->y = 10;
 	my_sn->next = NULL;
 
-	printf("2\n");
+	sg1 = (segment *) malloc(sizeof(segment));
+	sg1->x = 2;
+	sg1->y = 20;
+	sg1->next = NULL;
 
-	new_sg = (segment *) malloc(sizeof(segment));
-	new_sg->x = 15;
-	new_sg->y = 30;
-	new_sg->next = NULL;
+	sg2 = (segment *) malloc(sizeof(segment));
+	sg2->x = 3;
+	sg2->y = 30;
+	sg2->next = NULL;
 
-	printf("3\n");
+	sg3 = (segment *) malloc(sizeof(segment));
+	sg3->x = 4;
+	sg3->y = 40;
+	sg3->next = NULL;	
 
-	my_sn = prepend(my_sn, new_sg);
+	my_sn = prepend(my_sn, sg1);
+	my_sn = prepend(my_sn, sg2);
+	my_sn = prepend(my_sn, sg3);
 
-	printf("4\n");
-
-	printf("%p - %p\n", my_sn, my_sn->next);
 	tmp_sn = my_sn;
-	printf("1.: x = %d, y = %d\n", tmp_sn->x, tmp_sn->y);
+	printf("1. %p -> x = %d, y = %d\n", tmp_sn, tmp_sn->x, tmp_sn->y);
 	tmp_sn = tmp_sn->next;
-	printf("2.: x = %d, y = %d\n", tmp_sn->x, tmp_sn->y);
+	printf("2. %p -> x = %d, y = %d\n", tmp_sn, tmp_sn->x, tmp_sn->y);
+	tmp_sn = tmp_sn->next;
+	printf("3. %p -> x = %d, y = %d\n", tmp_sn, tmp_sn->x, tmp_sn->y);
+	tmp_sn = tmp_sn->next;
+	printf("4. %p -> x = %d, y = %d\n", tmp_sn, tmp_sn->x, tmp_sn->y);
 
-	printf("5\n");
+	snake_test1 = last_segment(my_sn);
 
-	snake_test = last_segment(my_sn);
+	printf("Last segment: %p\n\tx = %d, y = %d\n", snake_test1, snake_test1->x, snake_test1->y);
 
-	printf("6\n");
+	if (intersect_snake(my_sn))
+		printf("You're dead\n");
+	else
+		printf("You're still alive\n");
 
-	printf("Last segment: %p\n\tx = %d, y = %d\n", snake_test, snake_test->x, snake_test->y);
+	delete_segment(last_segment(my_sn));		// IT DOESN'T SET THE POINTER TO NULL, IT JUST SETS X AND Y TO 0
+												// THE POINTER STILL HAS ITS ADDRESS IN MEMORY INSTEAD OF NULL
+
+	tmp_sn = my_sn;
+	printf("1. %p -> x = %d, y = %d\n", tmp_sn, tmp_sn->x, tmp_sn->y);
+	tmp_sn = tmp_sn->next;
+	printf("2. %p -> x = %d, y = %d\n", tmp_sn, tmp_sn->x, tmp_sn->y);
+	tmp_sn = tmp_sn->next;
+	printf("3. %p -> x = %d, y = %d\n", tmp_sn, tmp_sn->x, tmp_sn->y);
+	tmp_sn = tmp_sn->next;
+	printf("4. %p -> x = %d, y = %d\n", tmp_sn, tmp_sn->x, tmp_sn->y);
+
+	snake_test2 = last_segment(my_sn);
+
+	printf("Last segment: %p\n\tx = %d, y = %d\n", snake_test2, snake_test2->x, snake_test2->y);
+
 	return 0;
 }
