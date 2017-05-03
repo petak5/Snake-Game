@@ -22,6 +22,15 @@
 
 /* --- list manipulation --- */
 
+segment* create_segment(int x, int y)
+{
+	segment* new = malloc(sizeof(segment));
+	new->x = x;
+	new->y = y;
+	new->next = NULL;
+	return new;
+}
+
 /* adds a segment at the beginning */
 /* WORKING BUT WE HAVE TO RETURN THE VALUE LIKE THIS */
 segment* prepend(snake sn, segment *sg)
