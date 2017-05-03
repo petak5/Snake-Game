@@ -42,6 +42,28 @@ void append(snake sn, segment *sg)
 	sg->next = NULL;
 }
 
+/* appends a segment with given xy, returns 0 if a segment is already there */
+int append_xy(snake sn, int x, int y)
+{
+	segment* p = sn;
+	/* check each segment then append new at the end */
+	while(p->next != NULL){
+		if(p->x == x && p->y == y)
+			return 0;
+		else
+			p = p->next;
+	}
+	
+	/* might use append() too */
+	segment* new = malloc(sizeof(segment));
+	new->x = x;
+	new->y = y;
+	new->next = NULL;
+	p->next = new;
+
+	return 1;
+}
+
 /* returns a pointer to the last segment, the snake's tail */
 /* WORKING */
 segment* last_segment(snake s)
