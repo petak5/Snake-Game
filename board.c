@@ -16,6 +16,7 @@
 		}
 }
 */
+
 // Initializing the board
 int  board()
 {
@@ -24,7 +25,7 @@ int  board()
 	int x;
 	int y;
 
-	char  board[BOARD_Y][BOARD_X]; // gonna want to delete this - wavy
+	char  board[BOARD_Y][BOARD_X]; 
 	//looping through the board
 	for(int y = 0; y < BOARD_Y; y++) {
 		for(int x = 0; x < BOARD_X; x++) {
