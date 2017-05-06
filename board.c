@@ -7,15 +7,7 @@
 #define BOARD_Y  40
 
 
-void checkval(int boxnum) { // checks if any coordinates are the same between blocks, with size boxnum of snakelength
-	int count; //int xvals[10]; int yvals[10];
-	for (count=0;count<boxnum;count++) {		
-		if ((posx[count] == posx[(count+1)]) && (posy[count] == posy[(count+1)])) { //change posx and posy to values of array containing x&y values
-			printf("crtical error, values are the same");
-			}
-		}
-	
-}
+
 
 // Initializing the board
 int  board()
@@ -25,7 +17,7 @@ int  board()
 	int x;
 	int y;
 
-	char  board[BOARD_Y][BOARD_X]; // gonna want to delete this - wavy
+	char  board[BOARD_Y][BOARD_X]; 
 	//looping through the board
 	for(int y = 0; y < BOARD_Y; y++) {
 		for(int x = 0; x < BOARD_X; x++) {
