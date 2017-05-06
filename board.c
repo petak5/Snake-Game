@@ -6,16 +6,7 @@
 #define BOARD_X  80
 #define BOARD_Y  40
 
-/* NOT WORKING YET */
-/*void checkval(int boxnum) { // checks if any coordinates are the same between blocks, with size boxnum of snakelength
-	int count; //int xvals[10]; int yvals[10];
-	for (count=0;count<boxnum;count++) {		
-		if ((posx[count] == posx[(count+1)]) && (posy[count] == posy[(count+1)])) { //change posx and posy to values of array containing x&y values
-			printf("crtical error, values are the same");
-			}
-		}
-}
-*/
+
 
 // Initializing the board
 int  board()
@@ -27,14 +18,15 @@ int  board()
 
 	char  board[BOARD_Y][BOARD_X]; 
 	//looping through the board
-	for(int y = 0; y < BOARD_Y; y++) {
-		for(int x = 0; x < BOARD_X; x++) {
+	for(int y = 0; y < (BOARD_Y); y++) {
+		for(int x = 0; x < (BOARD_X); x++) {
 			//even row
-			if((x + y) % 2 == 0)	//gonna want to check if x = 0 or x = BOARD_X, then place "|"
-			//if ((x == 0) || (x == BOARD_X)) {
+			if ((x==0) || (x==(BOARD_X-1)))	
 						board[y][x] = '|';
-			else
-				board[y][x] = '|';
+			else if ((y==0) || ((BOARD_Y-1)==y))
+				board[y][x] = '-';
+			else 
+				board[y][x] = '0';
 		}
 	}
 
@@ -42,7 +34,6 @@ int  board()
 	for(int y = 0; y < BOARD_Y; y++) {
 		for(int x = 0; x < BOARD_X; x++) {
 			printf("%c",board[y][x]);
-			printf("   ");
 		}
 		printf("\n");
 	}
