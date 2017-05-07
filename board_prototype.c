@@ -6,6 +6,7 @@
 void print_board(char board[][BOARD_X]);
 void init_board(char board[][BOARD_X]);
 
+// TEMP CODE
 int main(void)
 {
 	char  board[BOARD_Y][BOARD_X]; 
@@ -14,8 +15,10 @@ int main(void)
 	print_board(board);
 	return 0;
 }
+// TEMP CODE
 
 
+/* prints an array */
 /* WORKING */
 void print_board(char board[][BOARD_X])
 {
@@ -29,8 +32,9 @@ void print_board(char board[][BOARD_X])
 	}
 }
 
+/* initializes array */
 /* WORKING */
-void init_board(char board[][BOARD_X])
+void init_board(char board[][BOARD_X])	/* it uses macro BOARD_X */
 {
 	int x;
 	int y;
