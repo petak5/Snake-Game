@@ -18,7 +18,6 @@
 //
 
 #include "snake.h"
-#include <stdio.h>	// THIS IS HERE JUST FOR TESTING PURPOSES
 
 /* --- list manipulation --- */
 
@@ -54,7 +53,7 @@ void append(snake sn, segment *sg)
 }
 
 /* appends a segment with given xy, returns 0 if a segment is already there */
-/* WORKING -> I think the first one satisfies our needs and is easy to use */
+/* WORKING */
 int append_xy(snake sn, int x, int y)
 {
 	segment* p = sn;
@@ -99,26 +98,6 @@ int intersect_snake(snake s)
 	return 0;
 }
 
-/* deletes the segment pointed by seg */
-/* WARNING! USE WITH CAUTION :D */
-void delete_segment(segment *sg)	// DON'T USE !! -> maybe we should just delete it
-{
-	free(sg);		// only sets x and y to 0
-	sg = NULL;		// sets sg to nullbut the pointerwe wanna freeis still pointing to address in the memory
-					// the function below works bcs it's setting the sg->next to NULL, not the sg
-}
-
-/* deletes the last segment
- * could be used like
- *	if(ate food){
-		move
-	}
-	else{
-		move
-		delete last
-	}
- */
-
 /* WORKING */
 void delete_last_segment(snake s)
 {
@@ -130,9 +109,9 @@ void delete_last_segment(snake s)
 	p->next = NULL;
 }
 
-/* append the new head position, remove the tail position */
-/* WORKING -> also has to return segment* bcs of prepend() */
-segment* move_snake(snake s, int move_x, int move_y)		// MAYBE ADD intersect_snake() TO IT
+/* append the new head position, remove the tail position, return pointer to the updated structure */
+/* WORKING */
+segment* move_snake(snake s, int move_x, int move_y)	// MAYBE ADD intersect_snake() TO IT
 {
 	segment *tmp = create_segment(move_x, move_y);
 	s = prepend(s, tmp);
@@ -151,79 +130,5 @@ int check_snake(snake s, int x, int y)
 		else
 			tmp = tmp->next;
 	}
-	return 0;
-}
-
-/* TEMP CODE */
-/* Testing some functions */
-int main(void)
-{
-	snake my_sn, tmp_sn, snake_test1, snake_test2;
-	segment *sg1, *sg2, *sg3;
-
-	my_sn = (segment *) malloc(sizeof(segment));
-
-	my_sn->x = 1;
-	my_sn->y = 10;
-	my_sn->next = NULL;
-
-	sg1 = create_segment(2, 20);
-	sg2 = create_segment(3, 30);
-	sg3 = create_segment(4, 40);
-
-	my_sn = prepend(my_sn, sg1);
-	my_sn = prepend(my_sn, sg2);
-	my_sn = prepend(my_sn, sg3);
-
-	tmp_sn = my_sn;
-	printf("1. %p -> x = %d, y = %d\n", tmp_sn, tmp_sn->x, tmp_sn->y);
-	tmp_sn = tmp_sn->next;
-	printf("2. %p -> x = %d, y = %d\n", tmp_sn, tmp_sn->x, tmp_sn->y);
-	tmp_sn = tmp_sn->next;
-	printf("3. %p -> x = %d, y = %d\n", tmp_sn, tmp_sn->x, tmp_sn->y);
-	tmp_sn = tmp_sn->next;
-	printf("4. %p -> x = %d, y = %d\n", tmp_sn, tmp_sn->x, tmp_sn->y);
-
-	int i;
-	for (i = 5; i < 10; i++) {
-		putchar('\n');
-		my_sn = move_snake(my_sn, i, i * 10);
-		tmp_sn = my_sn;
-		printf("1. %p -> x = %d, y = %d\n", tmp_sn, tmp_sn->x, tmp_sn->y);
-		tmp_sn = tmp_sn->next;
-		printf("2. %p -> x = %d, y = %d\n", tmp_sn, tmp_sn->x, tmp_sn->y);
-		tmp_sn = tmp_sn->next;
-		printf("3. %p -> x = %d, y = %d\n", tmp_sn, tmp_sn->x, tmp_sn->y);
-		tmp_sn = tmp_sn->next;
-		printf("4. %p -> x = %d, y = %d\n", tmp_sn, tmp_sn->x, tmp_sn->y);
-	}
-
-	if (check_snake(my_sn, 6, 60))
-		printf("Found it\n");
-
-	putchar('\n');
-	append_xy(my_sn, 10, 100);				// both are the same
-	append(my_sn, create_segment(10, 100));	// I like this one much more, maybe we should use just this and delete the new one
-
-	tmp_sn = my_sn;
-	printf("1. %p -> x = %d, y = %d\n", tmp_sn, tmp_sn->x, tmp_sn->y);
-	tmp_sn = tmp_sn->next;
-	printf("2. %p -> x = %d, y = %d\n", tmp_sn, tmp_sn->x, tmp_sn->y);
-	tmp_sn = tmp_sn->next;
-	printf("3. %p -> x = %d, y = %d\n", tmp_sn, tmp_sn->x, tmp_sn->y);
-	tmp_sn = tmp_sn->next;
-	printf("4. %p -> x = %d, y = %d\n", tmp_sn, tmp_sn->x, tmp_sn->y);
-	tmp_sn = tmp_sn->next;
-	printf("5. %p -> x = %d, y = %d\n", tmp_sn, tmp_sn->x, tmp_sn->y);
-
-	snake_test1 = last_segment(my_sn);
-
-	printf("Last segment: %p\n\tx = %d, y = %d\n", snake_test1, snake_test1->x, snake_test1->y);
-
-	if (intersect_snake(my_sn))
-		printf("You're dead\n");
-	else
-		printf("You're still alive\n");
-
 	return 0;
 }
