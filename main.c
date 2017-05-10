@@ -24,37 +24,41 @@ void entergamemode() {	// Sets the terminal in a non-return mode
 
 void endgame() { //returns the terminal to regular
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &rettonorm);
+	exit(0);
 }
 
 int main() {
 	entergamemode();
-	
+	init_board();
 	snake_pos[1][0] = 1; snake_pos[1][1] = 1; 
 	char inp = '\0'; //initializing variable
 	while (1) {
-		board();
-		printf("direct: \r\n %d", direct);		
+		pboard();				printf("x:%d - y:%d",snake_pos[1][0], snake_pos[1][1] );
+		printf(" || direct:  %d \r\n", direct);		
 		read(STDIN_FILENO, &inp, 1); //reads for 2 seconds
 		switch (inp) { // Checks the character pressed
 			case ('w'):
 				printf("W\r\n");
 				direct = 2;
-				printf("\r\n direct:  %d", direct);
+				//printf("\r\n direct:  %d", direct);
 				break;
 			case ('a'): 
 				printf("A\r\n");
 				direct = 1;
-				printf("\r\n direct:  %d", direct);
+				//printf("\r\n direct:  %d", direct);
 				break;
 			case ('s'): 
 				printf("S\r\n");
 				direct = 4;
-				printf("\r\n direct:  %d", direct);
+				//printf("\r\n direct:  %d", direct);
 				break;
 			case ('d'): 
 				printf("D\r\n");
 				direct = 3;
-				printf("\r\n direct:  %d", direct);
+				//printf("\r\n direct:  %d", direct);
+				break;
+			case (!(('w')||('a')||('s')||('d'))):
+				system("wait .5");
 				break;
 		}
 		snake_move();

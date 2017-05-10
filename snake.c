@@ -3,28 +3,37 @@
 int direct = 3;
 int snake_pos[11][11];
 void endgame();
-#define BOARD_X 40
+
 void snake_move() {
 	switch (direct) {
 		case 1:
 			if (snake_pos[1][0] == 1) {
-				endgame(); }
+				endgame();
+				 }
 			else {
 				snake_pos[1][0] = snake_pos[1][0] - 1;}
 			break;
 		case 2:
+			if (snake_pos[1][1] == 1) {
+				endgame(); }
+			else {
+				snake_pos[1][1] = snake_pos[1][1] - 1;}
 			break;
 		case 3:
-			if (snake_pos[1][0] == BOARD_X) {
+			if (snake_pos[1][0] == (BOARD_X-2)) {
 				endgame(); }
 			else {
 				snake_pos[1][0]++;
-				printf("%d - %d",snake_pos[1][0], snake_pos[1][1] );}
+				//printf("x:%d - y:%d",snake_pos[1][0], snake_pos[1][1] );}
 			break;
 		case 4:
+			if (snake_pos[1][1] == (BOARD_Y-2)) {
+				endgame(); }
+			else {
+				snake_pos[1][1] = snake_pos[1][1] + 1;}
 			break;
 	}
-}
+}}
 
 int snakelen() {
 	int counter = 0;
