@@ -11,6 +11,7 @@ typedef segment *snake;
 
 segment* create_segment(int x, int y);
 segment* prepend(snake sn, segment *sg);
+segment* prepend_xy(snake sn, int x, int y);
 void append(snake sn, segment *sg);
 int append_xy(snake sn, int x, int y);
 segment* last_segment(snake s);

@@ -1,22 +1,5 @@
 #include <stdio.h>
-
-#define BOARD_X 80
-#define BOARD_Y 40
-
-void print_board(char board[][BOARD_X]);
-void init_board(char board[][BOARD_X]);
-
-// TEMP CODE
-int main(void)
-{
-	char  board[BOARD_Y][BOARD_X]; 
-	
-	init_board(board);
-	print_board(board);
-	return 0;
-}
-// TEMP CODE
-
+#include "board_prototype.h"
 
 /* prints an array */
 /* WORKING */

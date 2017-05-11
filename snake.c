@@ -40,6 +40,14 @@ segment* prepend(snake sn, segment *sg)
 	return sg;
 }
 
+segment* prepend_xy(snake sn, int x, int y)
+{
+	snake tmp;
+	tmp = create_segment(x, y);
+	tmp->next = sn;
+	return tmp;
+}
+
 /* adds a segment at the end */
 /* WORKING */
 void append(snake sn, segment *sg)
