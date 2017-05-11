@@ -2,6 +2,7 @@
 #include <termios.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include board_prototype.c"
 	
 struct termios rettonorm;
 
