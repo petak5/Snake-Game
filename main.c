@@ -30,11 +30,15 @@ void endgame() { //returns the terminal to regular
 int main() {
 	entergamemode();
 	init_board();
-	snake_pos[1][0] = 1; snake_pos[1][1] = 1; 
+	snake_pos[1][0] = 4; snake_pos[2][0] = 1;
+	snake_pos[1][1] = 3; snake_pos[2][1] = 1; 
+	snake_pos[1][2] = 2; snake_pos[2][2] = 1; 
+	snake_pos[1][3] = 1; snake_pos[2][3] = 1; 
 	char inp = '\0'; //initializing variable
 	while (1) {
 		pboard();				printf("x:%d - y:%d",snake_pos[1][0], snake_pos[1][1] );
-		printf(" || direct:  %d \r\n", direct);		
+		printf(" || direct:  %d \r\n", direct);	
+		moveback();	
 		read(STDIN_FILENO, &inp, 1); //reads for 2 seconds
 		switch (inp) { // Checks the character pressed
 			case ('w'):
