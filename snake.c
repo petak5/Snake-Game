@@ -1,9 +1,9 @@
 #define snake_max 10
 //Starting an array for each of the positions of the snake
 int direct = 3;
-int snake_pos[11][11];
+int snake_pos[40][40];
 void endgame();
-
+int lastpos[1][1];
 
 
 int snakelen() {
@@ -21,25 +21,45 @@ void moveback() {
 	resx = snake_pos[1][snakel];
 	resy = snake_pos[2][snakel];
 	board[resy][resx] = '0';
+	lastpos[0][0] = resx;
+	lastpos[1][0] = resy;
 	if (snakelen() == 1) {
 		;}
 	else {
-		/*	snake_pos[1][2]=snake_pos[1][1];
-			snake_pos[2][2]=snake_pos[2][1];  //works to move three blocks
-			snake_pos[1][1]=snake_pos[1][0];
-			snake_pos[2][1]=snake_pos[2][0];	*/	for (count=snakel;count>0;count--) {		
+		for (count=snakel;count>0;count--) {		
 			snake_pos[1][count]=snake_pos[1][(count-1)];
 			snake_pos[2][count]=snake_pos[2][(count-1)]; }
 	}
 }
 			
+void snake_add() {
+	int tempx,tempy,i;
+	tempx = lastpos[0][0];
+	tempy = lastpos[1][0];
+	i=snakelen();
+	snake_pos[1][i] = tempx;
+	snake_pos[2][i] = tempy;
+}
 			
-			
-		
+/*void checkoverlap() {
+	int i,resy,resx,resy2,resx2;
+	int lim = snakelen()+1;
+	for (i=1;i<=lim;i++) {
+		resx = snake_pos[1][0];
+		resy = snake_pos[2][0];
+		resx2 = snake_pos[1][i];
+		resy2 = snake_pos[2][i];
+		if ((resy==resy2)&&(resx==resx2)) {
+			endgame();
+			 }
+		else {
+			; }
+	}		
+}	*/	
 	
 
 void snake_move() {
-	switch (direct) {//need to implement a loop to sum all segments
+	switch (direct) {
 		int snkl = snakelen(); int i;
 		case 1:
 			if (snake_pos[1][0] == 1) {
@@ -69,6 +89,7 @@ void snake_move() {
 			break;
 		}
 }
+
 
 
 

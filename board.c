@@ -2,11 +2,12 @@
 #define BOARD_Y  20
 char  board[BOARD_Y][BOARD_X]; 
 #include "snake.c"
+#include "snake_food.c"
 //board for the game
 
 
 
-int snake_pos[11][11];
+//int snake_pos[40][40];
 //start the board
 void init_board() {
 	int x;
@@ -27,12 +28,12 @@ void init_board() {
 
 void snake_ins() {
 	// get snakelength and set each val to that
-	int xc,yc,xp,yp;	
-	for (yc=0;yc<2;) {
-		xc = yc + 1;
-		xp = snake_pos[xc][yc];
+	int xc,yc,xp,yp,snakebuf;
+	snakebuf = snakelen() + 1;	
+	for (yc=0;yc<snakebuf;) {
+		xp = snake_pos[1][yc];
+		yp = snake_pos[2][yc];
 		yc++;
-		yp = snake_pos[xc][yc];
 		board[yp][xp] = '#';		 
 	}
 }
@@ -53,6 +54,5 @@ int  pboard()
 		}
 	printf("\r\n");
 	}
-
 	return 0;
 }	
