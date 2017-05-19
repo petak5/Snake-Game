@@ -31,7 +31,7 @@ int main() {
 	entergamemode();
 	init_board();
 	food_pos();
-	//snake_pos[1][0] = 4; snake_pos[2][0] = 1;
+	snake_pos[1][0] = 2; snake_pos[2][0] = 2;
 	//snake_pos[1][1] = 3; snake_pos[2][1] = 1; 
 	//snake_pos[1][2] = 2; snake_pos[2][2] = 1; 
 	//snake_pos[1][3] = 1; snake_pos[2][3] = 1; 
