@@ -52,8 +52,9 @@ void snake_add() {
 		if ((resy==resy2)&&(resx==resx2)) {
 			endgame();
 			 }
-		else {
-			; }
+	if ((resx == lastpos[0][0])&&(resy==lastpos[1][0])) {
+		endgame();
+		}
 	}		
 }	*/	
 	
