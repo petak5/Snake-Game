@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "board_prototype.h"
+#include "board.h"
 
 /* prints an array */
 /* WORKING */
