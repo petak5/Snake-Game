@@ -1,5 +1,7 @@
 #include <stdlib.h>
 
+#ifndef SNAKE_H
+#define SNAKE_H
 /* snake structure */
 struct segment{
 	int x;
@@ -8,6 +10,8 @@ struct segment{
 };
 typedef struct segment segment;
 typedef segment *snake;
+
+#endif
 
 segment* create_segment(int x, int y);
 segment* prepend(snake sn, segment *sg);
