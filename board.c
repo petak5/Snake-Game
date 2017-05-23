@@ -17,7 +17,7 @@ void print_board(char board[][BOARD_X])
 
 /* initializes array */
 /* WORKING */
-void init_board(char board[][BOARD_X])	/* it uses macro BOARD_X */
+void init_board(char board[][BOARD_X])	/* it uses macro BOARD_X defined in board.h */
 {
 	int x;
 	int y;
