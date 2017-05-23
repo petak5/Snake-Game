@@ -1,41 +1,24 @@
-/*
- *	* functions to get input from user *
-*/
+#include "userinput.h"
 
-char U = 'w',	/* defined valid input values */
-     D = 's',
-     L = 'a',
-     R = 'd';
-
-void get_input(char *input)	/* gets input from user */
-{
-  *input = getchar();
+void entergamemode() {  // Sets the terminal in a non-return mode
+  tcgetattr(STDIN_FILENO,&rettonorm);
+//makes sure input and stuff isn't shown
+  struct termios game = rettonorm;
+  
+  game.c_lflag &= ~(ECHO | ICANON); //echo off. turno off output mode(canonical)
+  game.c_oflag &= ~(OPOST);
+  game.c_iflag &= ~(ICRNL | IXON);
+  game.c_cc[VMIN] = 0;
+  game.c_cc[VTIME] = 10;// amout of time to give fro user to add input for read() inn tenths of sec
+  tcsetattr(STDIN_FILENO, TCSAFLUSH, &game);
 }
 
-
-int check_input(char input)	/* checks if passed character is valid */
-{			/* if valid return 1, otherwise return 0 */
-  if (input == U || input == D || input == L || input == R)
-    return 1;
-  else
-    return 0;
+void endgamemode() { //returns the terminal to regular
+  tcsetattr(STDIN_FILENO, TCSAFLUSH, &rettonorm);//flushes the remaining input and returns the terminal settings tonormal
+  exit(0);//exits safely
 }
 
-
-void set_direction(char snake_dir)	/* sets snake's new direction */
+void get_input(char* input)
 {
-
-}
-
-
-void update_direction(void)	/* complete function for our game */
-{
-  char new_direction;
-
-  get_input(&new_direction);
-
-  if (check_input(new_direction)) {
-
-    set_direction(new_direction);
-  }
+  read(STDIN_FILENO, input, 1); //reads for 2 seconds(Sandard input into char inp, with length of 1)
 }
