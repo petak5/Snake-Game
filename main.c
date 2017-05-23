@@ -19,7 +19,7 @@ void entergamemode() {	// Sets the terminal in a non-return mode
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &game);
 }
 
-void endgame() { //returns the terminal to regular
+void endgamemode() { //returns the terminal to regular
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &rettonorm);
 }
 
@@ -45,5 +45,5 @@ int main() {
 		}
     		system("clear");
 	}
-	endgame();
+	endgamemode();
 }
