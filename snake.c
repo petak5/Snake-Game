@@ -41,22 +41,21 @@ void snake_add() {
 	snake_pos[2][i] = tempy;
 }
 			
-/*void checkoverlap() {
+void checkoverlap() {
 	int i,resy,resx,resy2,resx2;
 	int lim = snakelen()+1;
+	resx = snake_pos[1][0];
+	resy = snake_pos[2][0];
 	for (i=1;i<=lim;i++) {
-		resx = snake_pos[1][0];
-		resy = snake_pos[2][0];
 		resx2 = snake_pos[1][i];
 		resy2 = snake_pos[2][i];
 		if ((resy==resy2)&&(resx==resx2)) {
 			endgame();
 			 }
-	if ((resx == lastpos[0][0])&&(resy==lastpos[1][0])) {
-		endgame();
-		}
-	}		
-}	*/	
+	}	
+	if ((resx == lastpos[0][0]) && (resy == lastpos[1][0]))	{
+		endgame(); }
+}		
 	
 
 void snake_move() {
