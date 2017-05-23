@@ -1,5 +1,5 @@
 #include <unistd.h>
-#include <termios.h>
+#include <termios.h> // an add in to edit the terminal settings. Im presuming only works on linux
 #include <stdio.h>
 #include <stdlib.h>
 #include "board.c"
@@ -14,7 +14,7 @@ void entergamemode() {	// Sets the terminal in a non-return mode
 //makes sure input and stuff isn't shown
 	struct termios game = rettonorm;
 	
-	game.c_lflag &= ~(ECHO | ICANON);
+	game.c_lflag &= ~(ECHO | ICANON); //echo off. turno off output mode(canonical)
 	game.c_oflag &= ~(OPOST);
 	game.c_iflag &= ~(ICRNL | IXON);
 	game.c_cc[VMIN] = 0;
@@ -23,25 +23,24 @@ void entergamemode() {	// Sets the terminal in a non-return mode
 }
 
 void endgame() { //returns the terminal to regular
-	tcsetattr(STDIN_FILENO, TCSAFLUSH, &rettonorm);
-	exit(0);
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &rettonorm);//flushes the remaining input and returns the terminal settings tonormal
+	exit(0);//exits safely
 }
 
 int main() {
 	entergamemode();
 	init_board();
 	food_pos();
-	snake_pos[1][0] = 2; snake_pos[2][0] = 2;
-	//snake_pos[1][1] = 3; snake_pos[2][1] = 1; 
-	//snake_pos[1][2] = 2; snake_pos[2][2] = 1; 
-	//snake_pos[1][3] = 1; snake_pos[2][3] = 1; 
-	char inp = '\0'; //initializing variable
+	snake_pos[1][0] = 1; snake_pos[2][0] = 1;//starts snake at origin
+
+	char inp = '\0'; //initializing variable as null
 	while (1) {
-		pboard();				printf("x:%d - y:%d",snake_pos[1][0], snake_pos[1][1] );
+		pboard();/*print board*/				
+		printf("x:%d - y:%d",snake_pos[1][0], snake_pos[1][1] );
 		printf(" || direct:  %d || foodpos: %d \r\n", direct, foodlocale);	
-		moveback();	
-		read(STDIN_FILENO, &inp, 1); //reads for 2 seconds
-		switch (inp) { // Checks the character pressed
+		moveback();
+		read(STDIN_FILENO, &inp, 1); //reads for 2 seconds(Sandard input into char inp, with length of 1)
+		switch (inp) { // Checks the character pressed, note "\r" is needed before "\n" to make a new line
 			case ('w'):
 				printf("W\r\n");
 				direct = 2;
