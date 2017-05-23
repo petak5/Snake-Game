@@ -66,7 +66,7 @@ int main() {
 		
 		snake_move();
 		foodcheck();
-		//checkoverlap();
+		checkoverlap();
     		system("clear");
 	}
 	endgame();
