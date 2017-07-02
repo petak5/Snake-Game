@@ -4,13 +4,11 @@
 /* WORKING */
 void print_board(char board[][BOARD_X])
 {
-	int x;
-	int y;
 	for(int y = 0; y < BOARD_Y; y++) {
 		for(int x = 0; x < BOARD_X; x++) {
 			printf("%c",board[y][x]);
 		}
-	printf("\n");
+	printf("\r\n");
 	}
 }
 
@@ -18,9 +16,6 @@ void print_board(char board[][BOARD_X])
 /* WORKING */
 void init_board(char board[][BOARD_X])	/* it uses macro BOARD_X defined in board.h */
 {
-	int x;
-	int y;
-
 	//looping through the board
 	for(int y = 0; y < (BOARD_Y); y++) {
 		for(int x = 0; x < (BOARD_X); x++) {

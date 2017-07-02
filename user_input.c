@@ -1,4 +1,4 @@
-#include "userinput.h"
+#include "user_input.h"
 
 void entergamemode() {  // Sets the terminal in a non-return mode
   tcgetattr(STDIN_FILENO,&rettonorm);
@@ -9,7 +9,7 @@ void entergamemode() {  // Sets the terminal in a non-return mode
   game.c_oflag &= ~(OPOST);
   game.c_iflag &= ~(ICRNL | IXON);
   game.c_cc[VMIN] = 0;
-  game.c_cc[VTIME] = 10;// amout of time to give fro user to add input for read() inn tenths of sec
+  game.c_cc[VTIME] = 10;// amout of time to give for user to add input for read() inn tenths of sec
   tcsetattr(STDIN_FILENO, TCSAFLUSH, &game);
 }
 
